@@ -1,0 +1,17 @@
+{
+  "name": "com.middlemast.core",
+  "version": "0.1.0",
+  "displayName": "MiddleMast Core",
+  "description": "",
+  "unity": "2019.1",
+  "keywords": [
+    "MiddleMast",
+    "Core"
+  ],
+  "author": {
+    "name": "MiddleMast - Giovanni Zambiasi",
+    "email": "giovanni.zambiasi@gmail.com",
+    "url": "https://github.com/GiovanniZambiasi"
+  },
+  "type": "tool"
+}

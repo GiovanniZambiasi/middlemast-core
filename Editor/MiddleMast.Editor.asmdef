@@ -1,0 +1,18 @@
+{
+    "name": "MiddleMast.Editor",
+    "rootNamespace": "MiddleMast.Editor",
+    "references": [
+        "GUID:96c71b57c71bf934b939f6643c34587f"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
