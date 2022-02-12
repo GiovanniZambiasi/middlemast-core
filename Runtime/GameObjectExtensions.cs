@@ -79,5 +79,20 @@ namespace MiddleMast
 
             return false;
         }
+
+        public static void GetFirstLevelChildComponents<T>(this GameObject go, List<T> list)
+        {
+            Transform transform = go.transform;
+
+            for (int i = 0; i < transform.childCount; ++i)
+            {
+                Transform child = transform.GetChild(i);
+
+                if (child.TryGetComponent(out T component))
+                {
+                    list.Add(component);
+                }
+            }
+        }
     }
 }
