@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace MiddleMast
 {
     public static class SceneExtensions
     {
+        private static List<GameObject> _objects = new List<GameObject>();
+
         /// <summary>
         ///     Recursively searches the scene and tries to find the given component
         /// </summary>
@@ -33,27 +36,24 @@ namespace MiddleMast
             return default;
         }
 
-        public static T GetComponent<T>(this Scene scene, bool includeInactive = false)
+        public static T FindRootObjectOfType<T>(this Scene scene, bool includeInactive = true)
         {
-            GameObject[] roots = scene.GetRootGameObjects();
+            _objects.Clear();
+            scene.GetRootGameObjects(_objects);
 
-            for (int i = 0; i < roots.Length; i++)
+            for (int i = 0; i < _objects.Count; i++)
             {
-                GameObject root = roots[i];
+                GameObject root = _objects[i];
 
-                if (!root.activeInHierarchy && !includeInactive)
+                if (!root.activeSelf && !includeInactive)
                 {
                     continue;
                 }
 
-                T component = root.GetComponent<T>();
-
-                if (component == null)
+                if (root.TryGetComponent(out T component))
                 {
-                    continue;
+                    return component;
                 }
-
-                return component;
             }
 
             return default;
