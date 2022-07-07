@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace MiddleMast
 {
@@ -79,7 +80,7 @@ namespace MiddleMast
         /// <param name="array"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T[] Shuffle<T>(this T[] array, Random random)
+        public static T[] Shuffle<T>(this T[] array, System.Random random)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -99,6 +100,33 @@ namespace MiddleMast
         public static T RandomElement<T>(this T[] array)
         {
             return array[UnityEngine.Random.Range(0, array.Length)];
+        }
+
+        public static bool IsValidIndex(this ICollection collection, int index)
+        {
+            return index >= 0 && index < collection.Count;
+        }
+
+        /// <summary>
+        /// Returns the next element in the collection, or the first, in case the index is larger than length
+        /// </summary>
+        public static TElement NextOrOverflow<TElement>(this IEnumerable<TElement> collection, TElement element)
+        {
+            int index = collection.IndexOf(element);
+            int targetIndex = (index + 1) % collection.Count();
+
+            return collection.ElementAt(targetIndex);
+        }
+
+        /// <summary>
+        /// Returns the previous element in the collection, or the last, in case the index is less than zero
+        /// </summary>
+        public static TElement PreviousOrOverflow<TElement>(this IEnumerable<TElement> collection, TElement element)
+        {
+            int index = collection.IndexOf(element);
+            int targetIndex = Mathf.RoundToInt(Mathf.Repeat(index - 1f, collection.Count()));
+
+            return collection.ElementAt(targetIndex);
         }
     }
 }
